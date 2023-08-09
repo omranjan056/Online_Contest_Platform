@@ -1,0 +1,85 @@
+<%- include('header') %>
+
+<div class="pro-container">
+  <div class="pro-box">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <ul style="list-style-type: none">
+        <li>
+          <input
+            type="file"
+            accept="image/*"
+            style="display: none"
+            name="profile-picture"
+            id="profile-picture"
+            onchange="previewImage(event)"
+          />
+          <label for="profile-picture">
+            <img
+              src="/images/2.png"
+              style="width: 50%; border-radius: 100%; cursor: pointer"
+              alt=""
+            />
+          </label>
+          <img
+            id="preview"
+            src=""
+            style="width: 50%; border-radius: 100%; display: none"
+            alt="Preview"
+          />
+        </li>
+        <hr class="border border-dark" />
+        <li>Welcome, <%=Name%></li>
+        <li>email: <%=email%></li>
+        <li>
+          <button type="submit">Upload Picture</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="pro-box">
+    <button id="contest1">CONTEST DETAILS</button>
+    <div id="contest2" style="border: 2px solid grey"></div>
+  </div>
+</div>
+
+<script>
+  var button = document.getElementById("contest1");
+  button.addEventListener("click", function () {
+    fetch("/data")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0].contest_id);
+        var container = document.getElementById("contest2");
+        //container.innerText = "5";
+        container.innerHTML = "";
+        for (var i = 0; i < data.length; i++) {
+          var orderedList = document.createElement("ol");
+
+          // Create a list item for the current element and append it to the ordered list
+          var listItem = document.createElement("li");
+          if (data[i].attended == 1)
+            listItem.appendChild(
+              document.createTextNode(
+                "CONTEST" +
+                  data[i].contest_id +
+                  ":    SCORE:   " +
+                  data[i].score
+              )
+            );
+          else
+            listItem.appendChild(
+              document.createTextNode(
+                "CONTEST" + data[i].contest_id + ": " + "NOT ATTENDED"
+              )
+            );
+          orderedList.appendChild(listItem);
+
+          // Append the ordered list to the container div
+          container.appendChild(orderedList);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+</script>

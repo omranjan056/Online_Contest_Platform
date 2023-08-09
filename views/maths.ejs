@@ -1,0 +1,66 @@
+<%- include('header') %>
+
+    <!-- after navbar -->
+    <table class="table table-bordered" style="margin-top: 20px">
+      <thead>
+        <tr style="text-align: center">
+          <th width="10%" scope="col">#</th>
+          <th width="80%" scope="col">Problem</th>
+          <th width="10%" scope="col">Rating(x/10)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < result.length; i++) { %>
+        <tr>
+          <th scope="row"><%= result[i].id %></th>
+          <td>
+            <p  class="truncated-text"> <%= result[i].question_text%></p>
+            <button
+              id="myButton"
+              data-id="<%=result[i].id%>"
+              type="button"
+              class="btn btn-outline-success btn-sm"
+            >
+              Full_View
+            </button>
+            <i class="fa-solid fa-check-double"></i>
+          </td>
+          <td>
+            <%=result[i].difficulty %> <% if (result[i].difficulty<=4) { %>
+            <span class="badge badge-pill badge-success">Easy</span>
+            <% } else if (result[i].difficulty>=5 && result[i].difficulty<=8) {
+            %>
+            <span class="badge badge-pill badge-warning">Medium</span>
+            <% } else { %>
+            <span class="badge badge-pill badge-danger">Hard</span>
+            <% } %>
+          </td>
+        </tr>
+
+        <% } %>
+      </tbody>
+    </table>
+
+    <script>
+      var buttons = document.querySelectorAll("[data-id]");
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var id = this.getAttribute("data-id");
+          console.log(id);
+          window.location.href = "/q_details?id=" + id;
+        });
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

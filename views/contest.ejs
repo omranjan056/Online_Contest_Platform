@@ -1,0 +1,624 @@
+<%- include('header') %>
+
+<table class="table table-bordered">
+  <div
+    class="btn-group d-none d-md-block"
+    role="group"
+    style="text-align: center; margin-top: 10px"
+  >
+    <button type="button" class="btn btn-outline-success all" id="MATHEMATICS">
+      MATHEMATICS
+    </button>
+    <button type="button" class="btn btn-outline-success all" id="REASONING">
+      REASONING
+    </button>
+    <button type="button" class="btn btn-outline-success all" id="GI">
+      GI
+    </button>
+    <button type="button" class="btn btn-outline-success all" id="ENGLISH">
+      ENGLISH
+    </button>
+    <div style="display: flex; justify-content: flex-end;"><button onclick="openFullscreen()" class="btn btn-secondary">FULL SCREEN</button></div>
+  </div>
+  
+
+  <div class="dropdown d-md-none" style="text-align: center; margin-top: 10px">
+    <button
+      class="btn btn-outline-success dropdown-toggle"
+      type="button"
+      id="buttonDropdown"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Select a subject
+    </button>
+    <div class="dropdown-menu" aria-labelledby="buttonDropdown">
+      <button class="dropdown-item all" type="button" id="MATHEMATICS">
+        MATHEMATICS
+      </button>
+      <button class="dropdown-item all" type="button" id="REASONING">
+        REASONING
+      </button>
+      <button class="dropdown-item all" type="button" id="GI">GI</button>
+      <button class="dropdown-item all" type="button" id="ENGLISH">
+        ENGLISH
+      </button>
+      <button class="dropdown-item all" onclick="openPopup()">
+        See Details
+      </button>
+    </div>
+  </div>
+</table>
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr style="text-align: center">
+      <th width="100%" scope="col">
+        <button class="btn btn-warning" id="cur_sec">
+          CUR SEC : MATHEMATICS
+        </button>
+      </th>
+    </tr>
+  </thead>
+</table> -->
+
+<div class="container">
+  <div class="row" id="main">
+    <div class="col-lg-4 col-sm-12 taskPane" id="container1">
+      <button class="btn btn-outline-success">1</button>
+    </div>
+    <div class="col-lg-8 col-sm-12" id="container2">
+      <div class="row" id="container2_1"></div>
+      <div class="row" id="container2_2"></div>
+      <div class="row" id="container2_3">
+        <img src="" id="img" alt="" />
+      </div>
+      <div class="row" style="margin-top: 8px" id="contain1"></div>
+      <div class="row" style="margin-top: 8px" id="contain2"></div>
+      <div class="row" style="margin-top: 8px" id="contain3"></div>
+      <div class="row" style="margin-top: 8px" id="contain4"></div>
+      <div class="row" style="margin-top: 8px" id="contain5"></div>
+    </div>
+  </div>
+  <div><button id="clear" class="btn">CLEAR SELECTION</button></div>
+
+
+  <div id="popup" style="display: none">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <div class="row">
+      <div class="card col-lg-3 style="width: 18rem;">
+        <div class="card-header">
+          MATHEMATICS
+        </div>
+        <div id="keyValueContainer1"></div>
+      </div>
+
+      <div class="card col-lg-3 style="width: 18rem;">
+        <div class="card-header">
+          REASONING
+        </div>
+        <div id="keyValueContainer2"></div>
+      </div>
+
+      <div class="card col-lg-3 style="width: 18rem;">
+        <div class="card-header">
+          GI
+        </div>
+        <div id="keyValueContainer3"></div>
+      </div>
+
+      <div class="card col-lg-3 style="width: 18rem;">
+        <div class="card-header">
+          ENGLISH
+        </div>
+        <div id="keyValueContainer4"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<hr style="color: 2px solid green" />
+<div class="row" style="text-align: center; margin-top: 20px">
+  <div class="col-lg-12">
+    <button class="btn btn-outline-success all" onclick="openPopup()">
+      See Details
+    </button>
+    
+  </div>
+</div>
+
+<div class="col-lg-12">
+  <button
+  onclick="confirmSubmit()"
+    class="btn btn-success"
+    style="
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      margin-right: 50px;
+      margin-bottom: 50px;
+    "
+  >
+    SUBMIT
+  </button>
+</div>
+
+<div id="details-pane" style="display: none">
+  <div class="col-lg-3" id="maths">
+    <table>
+      <tbody>
+        <tr>
+          <td>QS.1</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>QS.2</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>QS.3</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>QS.4</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>QS.5</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>Row 6, Column 1</td>
+          <td>Row 6, Column 2</td>
+        </tr>
+
+        <tr>
+          <td>Row 7, Column 1</td>
+          <td>Row 7, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 8, Column 1</td>
+          <td>Row 8, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 9, Column 1</td>
+          <td>Row 9, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 10, Column 1</td>
+          <td>Row 10, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 11, Column 1</td>
+          <td>Row 11, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 12, Column 1</td>
+          <td>Row 12, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 13, Column 1</td>
+          <td>Row 13, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 14, Column 1</td>
+          <td>Row 15, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 16, Column 1</td>
+          <td>Row 16, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 17, Column 1</td>
+          <td>Row 17, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 18, Column 1</td>
+          <td>Row 18, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 19, Column 1</td>
+          <td>Row 19, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 20, Column 1</td>
+          <td>Row 20, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 21, Column 1</td>
+          <td>Row 21, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 21, Column 1</td>
+          <td>Row 21, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 22, Column 1</td>
+          <td>Row 22, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 23, Column 1</td>
+          <td>Row 23, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 24, Column 1</td>
+          <td>Row 24, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 25, Column 1</td>
+          <td>Row 25, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 26, Column 1</td>
+          <td>Row 26, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 27, Column 1</td>
+          <td>Row 27, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 28, Column 1</td>
+          <td>Row 28, Column 2</td>
+        </tr>
+        <tr>
+          <td>Row 29, Column 1</td>
+          <td>Row 29, Column 2</td>
+        </tr>
+
+        <!-- ... and so on up to Row 30 ... -->
+        <tr>
+          <td>Row 30, Column 1</td>
+          <td>Row 30, Column 2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-3" id="gi"></div>
+  <div class="col-lg-3" id="reasoning"></div>
+  <div class="col-lg-3" id="english"></div>
+  <button id="close-details-button">Close</button>
+</div>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+  integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script>
+ function openFullscreen() {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    }
+
+$(document).ready(function () {
+    $("#MATHEMATICS").click();
+  });
+  function openPopup() {
+    var imp = document.getElementById("main");
+    imp.style.display  = "none";
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
+  }
+
+  function closePopup() {
+    var imp = document.getElementById("main");
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
+    imp.style.display  = "flex";
+    $("#MATHEMATICS").click();
+  }
+  //CLEAR SELCTION
+  
+
+  var hashMap = {};
+  var hashans = {};
+
+  var contest_id;
+  //changing current section content
+  const buttons = document.querySelectorAll(".all");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const prevButt2 = document.querySelector(".active1");
+      if (prevButt2) {
+        prevButt2.classList.remove("active1");
+      }
+
+      // Add color to the clicked button
+      button.classList.add("active1");
+      var content = button.id;
+      var cur_sec = "";
+      if (content == "MATHEMATICS") cur_sec = 1;
+      else if (content == "REASONING") cur_sec = 2;
+      else if (content == "GI") cur_sec = 3;
+      else if (content == "ENGLISH") cur_sec = 4;
+      //console.log(content);
+      var k = "CUR SEC : ";
+      
+      $.ajax({
+        type: "GET",
+        url: "/sec",
+        data: {
+          section: cur_sec,
+        },
+        success: function (data) {
+          var container1 = document.getElementById("container1");
+          container1.textContent = "";
+          //console.log(data.result.length);
+          var temp = 0,
+              temp1 = 0;
+
+              
+          for (let i = 0; i < data.result.length; i++) {
+              if(data.result[i].id==1)
+              {
+                contest_id = data.result[i].contest_id;
+              }
+
+            hashans[data.result[i].id]=data.result[i].CORRECT;
+            const button = document.createElement("button");
+            if(data.result[i].id<10)
+            button.textContent = "0"+data.result[i].id;
+            else
+            button.textContent = data.result[i].id;
+            button.style.marginRight = "20px";
+            button.style.marginTop = "20px";
+            button.className='btn btn-warning';
+            button.addEventListener("click", function () {
+              const prevButto = document.querySelector(".active");
+              if (prevButto) {
+                prevButto.classList.remove("active");
+              }
+              
+              // Add color to the clicked button
+
+              button.classList.add("active");
+              cur_question_index = i; // Set the current question index to the clicked button's index
+              var op1 = data.result[i].option_a;
+              var op2 = data.result[i].option_b;
+              var op3 = data.result[i].option_c;
+              var op4 = data.result[i].option_d;
+              document.getElementById("container2_1").textContent =
+                data.result[i].id;
+              document.getElementById("container2_2").textContent =
+                data.result[i].question_text;
+              var src = data.result[i].image_path;
+
+              document.getElementById("img").src = src;
+          
+
+              // four options
+              const containerr1 = document.getElementById("contain1");
+              containerr1.innerHTML = "";
+              const radio1 = document.createElement("input");
+              var prefix1 = "option-0-";
+              const classname1 =
+                prefix1 + content + data.result[i].question_number;
+              radio1.type = "radio";
+              radio1.name = content + data.result[i].question_number;
+              radio1.id = classname1;
+              radio1.value = 1;
+              const contents1 = document.createElement("span");
+              contents1.textContent = op1;
+              containerr1.appendChild(radio1);
+              containerr1.appendChild(contents1);
+
+              const containerr2 = document.getElementById("contain2");
+              containerr2.innerHTML = "";
+              const radio2 = document.createElement("input");
+              var prefix2 = "option-1-";
+              const classname2 =
+                prefix2 + content + data.result[i].question_number;
+              radio2.type = "radio";
+              radio2.name = content + data.result[i].question_number;
+              radio2.id = classname2;
+              radio2.value = 2;
+              const contents2 = document.createElement("span");
+              contents2.textContent = op2;
+              containerr2.appendChild(radio2);
+              containerr2.appendChild(contents2);
+
+              
+
+              const containerr3 = document.getElementById("contain3");
+              containerr3.innerHTML = "";
+              const radio3 = document.createElement("input");
+              var prefix3 = "option-2-";
+              const classname3 =
+                prefix3 + content + data.result[i].question_number;
+              radio3.type = "radio";
+              radio3.name = content + data.result[i].question_number;
+              radio3.id = classname3;
+              radio3.value = 3;
+              const contents3 = document.createElement("span");
+              contents3.textContent = op3;
+              containerr3.appendChild(radio3);
+              containerr3.appendChild(contents3);
+
+              const containerr4 = document.getElementById("contain4");
+              containerr4.innerHTML = "";
+              const radio4 = document.createElement("input");
+              var prefix4 = "option-3-";
+              const classname4 =
+                prefix4 + content + data.result[i].question_number;
+              radio4.type = "radio";
+              radio4.name = content + data.result[i].question_number;
+              radio4.id = classname4;
+              radio4.value = 4;
+              const contents4 = document.createElement("span");
+              contents4.textContent = op4;
+              containerr4.appendChild(radio4);
+              containerr4.appendChild(contents4);
+              
+              
+              
+
+              var q_no = data.result[i].id;
+              if(q_no in hashMap)
+              {
+                if(hashMap[q_no]==1)
+                radio1.checked=true;
+                else if(hashMap[q_no]==2)
+                radio2.checked=true;
+                else if(hashMap[q_no]==3)
+                radio3.checked=true;
+                else if(hashMap[q_no]==4)
+                radio4.checked=true;
+              }
+              
+              
+               
+              
+              radio1.addEventListener('click', function(){
+                hashMap[q_no] = 1;
+              })
+              radio2.addEventListener('click', function(){
+                hashMap[q_no] = 2;
+              })
+              radio3.addEventListener('click', function(){
+                hashMap[q_no] = 3;
+              })
+              radio4.addEventListener('click', function(){
+                hashMap[q_no] = 4;
+              })
+
+              // var temp=0;
+              // const clear = document.getElementById("clear");
+              // clear.addEventListener('click', function(){
+                
+              //   if(temp==0)
+              //   {
+              //     radio1.checked = false;
+              //   radio2.checked = false;
+              //   radio3.checked = false;
+              //   radio4.checked = false;
+              //     hashMap[q_no]=5;
+              //     temp++;
+              //   }
+                
+              // })
+              
+              console.log(hashMap);
+
+              
+
+              
+
+            });
+            container1.appendChild(button);
+            if (temp == 0) {
+              button.click();
+              temp++;
+            }
+          }
+          
+      
+          
+  
+
+          // Add a click event listener to the existing "Next" button that allows users to navigate through the quiz questions
+          // const next_button = document.getElementById("nxt");
+          // next_button.addEventListener("click", function () {
+          //   cur_question_index++;
+          //   if (cur_question_index >= data.result.length) {
+          //     // If we've reached the end of the questions, go back to the first question
+          //     cur_question_index = 0;
+          //   }
+
+          //   // Update the page with the details of the next question
+          //   const next_question = data.result[cur_question_index];
+          //   var op1 = next_question.option_a;
+          //   var op2 = next_question.option_b;
+          //   var op3 = next_question.option_c;
+          //   var op4 = next_question.option_d;
+          //   document.getElementById("container2_1").textContent =
+          //     next_question.question_number;
+          //   document.getElementById("container2_2").textContent =
+          //     next_question.question_text;
+          //   var src = next_question.image_path;
+          //   document.getElementById("img").src = src;
+          //   document.getElementById("op1").textContent = op1;
+          //   document.getElementById("op2").textContent = op2;
+          //   document.getElementById("op3").textContent = op3;
+          //   document.getElementById("op4").textContent = op4;
+          // });
+        },
+        error: function (xhr, status, error) {
+          //console.log("fd");
+        },
+      });
+    });
+  });
+
+  
+  var score = 0;
+  function confirmSubmit() {
+  var result = confirm("Are you sure you want to submit?");
+  if (result) {
+    // User clicked "OK" in the confirmation dialog
+    // Proceed with the submission
+    
+    
+    //calculating score of an user
+    
+    for (var key in hashans) {
+  if (hashans.hasOwnProperty(key)) {
+    if(hashMap.hasOwnProperty(key))
+    {
+      if(hashMap[key]==hashans[key])
+      score+=2;
+      else
+      score-=0.5;
+    }
+  }
+}
+console.log(score);
+
+
+
+
+
+    fetch("/confirm1", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id1:score
+            }),
+          });
+
+          fetch("/responses", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              data:hashMap
+            }),
+          });
+
+          closeRoute();
+    
+  } else {
+    // User clicked "Cancel" in the confirmation dialog
+    // Do nothing or perform any desired actions
+  }
+}
+function closeRoute()
+{
+
+  console.log(score);
+  window.location.href="/contest_success";
+}
+
+</script>

@@ -1,0 +1,196 @@
+<%- include('header') %>
+
+<div class="card">
+  <div class="card-header">
+     <div class="row">
+      <div class="col-lg-3">
+        <%= id%>
+      </div>
+      <div class="col-lg-6">
+        <p>Note: After every minute your score will get decrease by 10%</p>
+      </div>
+      <div class="col-lg-3" >
+        <button class="btn btn-success" id="timer"></button>
+        <button class="btn btn-success" id="score"></button>
+      </div>
+     </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Read Carefully:</h5>
+    <p class="card-text"><%= question%></p>
+    <img src="<%=image%>" />
+  </div>
+</div>
+<div class="alert alert-primary" role="alert">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="q1" id="q1b" value="1" />
+    <label class="form-check-label" for="q1b"><%=o1%></label>
+  </div>
+</div>
+<div class="alert alert-primary" role="alert">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="q1" id="q1b" value="2" />
+    <label class="form-check-label" for="q1b"><%=o2%></label>
+  </div>
+</div>
+<div class="alert alert-primary" role="alert">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="q1" id="q1b" value="3" />
+    <label class="form-check-label" for="q1b"><%=o3%></label>
+  </div>
+</div>
+<div class="alert alert-primary" role="alert">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="q1" id="q1b" value="4" />
+    <label class="form-check-label" for="q1b"><%=o4%></label>
+  </div>
+</div>
+<div class="row" style="text-align: center;">
+  <div class="col-lg-3 col-sm-3">
+    <button class="btn btn-outline-info" id="prevbtn"  data-id3="<%= id-1 %>">Prev</button>
+  </div>
+  <div class="col-lg-5 col-sm-3">
+    <button class="btn btn-outline-info" id="myButton">check</button>
+  </div>
+  <div class="col-lg-1 col-sm-1">
+    <span id="message" class="badge badge-success" style="margin-left: 10px;"></span>
+  </div>
+  <div class="col-lg-3 col-sm-5">
+    <button class="btn btn-outline-info" id="nxtbutton" data-id1="<%= id+1 %>" data-id2="<%= total %>">Next Question</button>
+  </div>
+</div>
+ 
+<script>
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const selectedOption = document.querySelector(
+        'input[type="radio"]:checked'
+      ).value;
+
+    //sending selected data to server side
+    const data = {
+        selectedOption: selectedOption
+      };
+
+      // sending data to server side
+      fetch('/selected', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(function(response) {
+        console.log('Data sent successfully');
+      })
+      .catch(function(error) {
+        console.error('Error sending data:', error);
+      });
+    });
+  });
+
+
+  const button = document.getElementById("myButton");
+  button.addEventListener("click", () => {
+    // Make an HTTP request to the server
+    fetch("/check")
+      .then(response => response.text())
+      .then(message => {
+        // Update the EJS file with the message from the server
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = message;
+      });
+  });
+
+
+
+  
+
+  // timer
+
+  const duration = 605;
+const timerElement = document.getElementById("timer");
+
+// Get the stored elapsed time from localStorage, or set it to 0 if it doesn't exist
+let elapsedTime = parseInt(localStorage.getItem("myTimerValue")) || 0;
+
+// Get the current time
+const startTime = new Date().getTime() - elapsedTime;
+
+// Update the timer every second
+var remainingTime="";
+const intervalId = setInterval(() => {
+  // Calculate the remaining time
+  const currentTime = new Date().getTime();
+  elapsedTime = currentTime - startTime;
+ remainingTime = duration * 1000 - elapsedTime;
+
+  // Format the remaining time as minutes and seconds
+  const hours = Math.floor(remainingTime / (1000 * 3600));
+  const minutes = Math.floor((remainingTime % (1000 * 3600)) / (1000 * 60));
+  const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+  // Update the timer element with the formatted time
+  timerElement.textContent = formattedTime;
+
+  // Store the elapsed time in localStorage
+  localStorage.setItem("myTimerValue", elapsedTime);
+
+  // Stop the timer when the duration has elapsed
+  if (remainingTime <= 0) {
+    clearInterval(intervalId);
+    timerElement.textContent = "Time's up!";
+  }
+
+  // Change the class of the timer element when there are 10 minutes or less remaining
+  if (remainingTime <= 600000) {
+    timerElement.className = "btn btn-outline-danger";
+  }
+}, 1000);
+
+
+var score = 20;
+const myContentElement = document.getElementById("score");
+myContentElement.textContent = score;
+setInterval(() => {
+  
+  // Update the content of the element
+    if(remainingTime>0)
+     score = score- (score)/10;
+
+  myContentElement.textContent = score;
+}, 60000); 
+
+
+ 
+
+//next button
+
+const submitBtn = document.getElementById('nxtbutton');
+submitBtn.addEventListener('click', function(event) {
+  var id1 = event.target.getAttribute("data-id1");
+  var id2 = event.target.getAttribute("data-id2");
+  if(id1<=id2)
+  window.location.href = "/q_details?id=" + id1;
+});
+
+
+//prev button
+const submitBtn1 = document.getElementById('prevbtn');
+submitBtn1.addEventListener('click', function(event) {
+  var id3 = event.target.getAttribute("data-id3");
+  // var id2 = event.target.getAttribute("data-id2");
+  
+  if(id3>0)
+  {
+    window.location.href = "/q_details?id=" + id3;
+  }
+});
+
+
+  
+</script>
+</body>
+</html>

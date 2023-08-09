@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMP_CNTST</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-8X9Xdv5nIt1tVogQiKjHsdGQ5DgHfXXZo57zEiKdt9Xv0yo5+5fv/hknIYKzyw2QH5lu+MEENg33LYZ8xd4W9A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/c2ae15f0f6.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="index-body">
+    <header class="header">
+      <section id="title">
+        <div class="navbar navbar-expand-lg navbar-light" style=" 
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(5px); height: auto; margin-bottom: 10px;">
+          <a href="/" class="navbar-brand"><p class="clip">TE<span class="big-letters">S</span>T<span class="big-letters">S</span>FOR<span class="big-letters">C</span>E</p></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">HOME</a>
+              </li>
+  
+              <% if (user) { %>
+              <li class="nav-item">
+                
+                <a class="nav-link" href="/logout">LOGOUT</i></a>
+                
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">PROFILE</a>
+              </li>
+
+              
+             
+              <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">LOGIN</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register">SIGN UP</a>
+              </li>
+              <% } %>
+  
+             
+              <li class="nav-item">
+                <a class="nav-link" href="/contest">CONTESTS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/problemset">PROBLEMSET</a>
+              </li>
+            </ul>
+          </div>
+        </div> 
+      </section>
+    </header>
+    <main class="main-container">
+      <div class="box">
+        <div class="left-container" style="text-align: center;">
+          <div class="l-item"><h1>DAILY CONTEST</h1><ul style="list-style-type: none;font-size: 1rem; font-weight: 800;">
+            <li>TEST WILL BE HELD EVERY MORNING 8 A.M</li>
+            <li>DURATION WILL BE 1 HR</li>
+            <li>TEST WILL BE TAKEN FROM THE SPECIFIED TOPIC</li>
+            <li>TEST TOPICS WILL BE ALTERNATE ON THE BASIS OF APTITUDE, REASONING, ENGLISH, GI</li>
+          </ul></div>
+            <div class="l-item"><h1>WEEKELY TEST</h1>
+            <ul style="list-style-type: none; font-size: 1rem; font-weight: 800;">
+              <li>THIS CONTEST WILL HELD AT EVERY SUNDAY MORNING AT 8 A.M</li>
+              <li>DURATION WILL BE 2 HRS</li>
+              <li>PATTERN WILL BE SIMILAR TO REAL SSC(CHSL+CGL) EXAMS</li>
+            </ul></div>
+           
+        </div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <span class="right-container">
+        <div class="r-item">
+          <% if (!user) { %>
+            <div role="alert">
+              <div style="border-bottom: 2px solid gray; margin-bottom: 20px;">
+                <h4 class="alert-heading" style="font-size: 1em;">New User?</h4>
+              <button class="btn btn-primary btn-sm" type="button">
+                <a href="/register" style="color: white; text-decoration: none;">Register</a>
+              </button>
+              </div>
+              
+             <div style="border-bottom: 2px solid gray; margin-bottom: 20px; width: 100%; height: auto;">
+              <h4 class="alert-heading" style="font-size: 1em;">Already registered?</h4>
+              <button class="btn btn-primary btn-sm" type="button">
+                <a href="/login" style="color: white; text-decoration: none;">LogIn</a>
+              </button>
+             </div>
+              
+             <div style="border-bottom: 2px solid gray; margin-bottom: 2px;">
+              <h4 class="alert-heading" style="font-size: 1em;">Before Contest</h4>
+              <a href="/contest" style="text-decoration: underline">
+                <h6 class="alert-heading">SSC-ROUND:01</h6>
+              </a>
+              <div class="timer" id="timer"></div>
+             </div>
+            </div>
+            <% } else { %>
+              <div >
+                <h4 class="alert-heading">Before Contest</h4>
+                <a href="/contest" style="text-decoration: underline">
+                  <h6 class="alert-heading">SSC-ROUND:01</h6>
+                </a>
+                <div class="timer" id="timer"></div>
+              </div>
+            <% } %>
+            </div>
+        
+          </span>
+    </aside>
+    <footer class="footer el"><p>&copy; testsforce</p></footer>
+    
+
+    <div class="main-container">
+      <span style="width: 60%;">
+        
+      </span>
+
+      
+    </div>
+
+    <script>
+      var endTime = new Date("2023-03-07T23:59:59");
+      var timeZone = "IST";
+
+      // Update the timer every second
+      setInterval(function () {
+        // Calculate the remaining time
+        var now = new Date();
+        var timeRemaining = endTime.getTime() - now.getTime();
+
+        // Convert the remaining time to days, hours, minutes, and seconds
+        var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(
+          (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor(
+          (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Display the remaining time on the webpage
+        document.getElementById("timer").innerHTML =
+          hours + "h " + minutes + "m " + seconds + "s";
+      }, 1000);
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
